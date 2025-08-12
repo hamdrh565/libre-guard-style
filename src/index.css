@@ -100,7 +100,7 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground antialiased font-sans;
   }
 
   /* Interactive glow utility for hero */
@@ -121,4 +121,35 @@ All colors MUST be HSL.
   .interactive-glow:hover::before {
     opacity: 1;
   }
+}
+
+@layer utilities {
+  /* Underline reveal for links */
+  .story-link {
+    position: relative;
+    display: inline-block;
+  }
+  .story-link::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    right: 0; /* RTL */
+    background: hsl(var(--primary));
+    transform-origin: bottom left;
+    transition: transform 0.3s ease;
+  }
+  .story-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom right;
+  }
+
+  /* Hover scale */
+  .hover-scale { transition: transform 0.2s ease; }
+  .hover-scale:hover { transform: scale(1.05); }
+
+  /* Pulse helper */
+  .pulse { animation: pulse 2s cubic-bezier(0.4,0,0.6,1) infinite; }
 }
